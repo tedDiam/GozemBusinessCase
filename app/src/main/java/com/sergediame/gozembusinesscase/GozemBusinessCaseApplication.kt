@@ -1,7 +1,7 @@
 package com.sergediame.gozembusinesscase
 
 import android.app.Application
-import networkModule
+import com.sergediame.network.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
