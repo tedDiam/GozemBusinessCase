@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "710216819774",
+    "project_id": "gozembusinesscase-8e023",
+    "storage_bucket": "gozembusinesscase-8e023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710216819774:android:89756b6ca6afe396091d6f",
+        "android_client_info": {
+          "package_name": "com.sergediame.gozembusinesscase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD88YbqgOtFI3cg4GII8xFauSmrmJhrjrc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
