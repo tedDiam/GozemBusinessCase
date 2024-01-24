@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "GozemBusinessCase"
 include(":app")
 include(":network")
+include(":domain")
