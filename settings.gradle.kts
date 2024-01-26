@@ -23,4 +23,5 @@ rootProject.name = "GozemBusinessCase"
 include(":app")
 include(":network")
 include(":domain")
+include(":data")
 include(":auth")
