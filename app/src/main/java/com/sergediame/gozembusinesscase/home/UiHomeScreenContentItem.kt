@@ -1,4 +1,4 @@
-package com.sergediame.gozembusinesscase.ui.model
+package com.sergediame.gozembusinesscase.home
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Dataset

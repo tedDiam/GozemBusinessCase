@@ -38,8 +38,6 @@ import com.sergediame.domain.entity.HomeScreenContentItem
 import com.sergediame.gozembusinesscase.components.CustomTopAppBar
 import com.sergediame.gozembusinesscase.common.UiState
 import com.sergediame.gozembusinesscase.common.UiStateWrapper
-import com.sergediame.gozembusinesscase.ui.model.UiHomeScreenContentItem
-import com.sergediame.gozembusinesscase.ui.model.toUi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
