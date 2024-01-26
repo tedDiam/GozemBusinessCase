@@ -1,4 +1,4 @@
-package com.placeafrica.auth
+package com.sergediame.auth
 
 import org.junit.Test
 
