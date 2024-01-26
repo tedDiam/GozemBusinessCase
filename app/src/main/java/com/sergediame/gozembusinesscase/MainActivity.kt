@@ -4,44 +4,54 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.sergediame.gozembusinesscase.navigation.Graph
+import com.sergediame.gozembusinesscase.navigation.RootNavGraph
 import com.sergediame.gozembusinesscase.ui.theme.GozemBusinessCaseTheme
+import kotlinx.coroutines.launch
+import org.koin.androidx.compose.KoinAndroidContext
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainActivityViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            GozemBusinessCaseTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isLoggedState.collect { isLogged ->
+                    setContent {
+                        KoinAndroidContext {
+                            GozemBusinessCaseTheme {
+                                RootNavGraph(
+                                    startDestination = getStartDestination(isLogged)
+                                )
+                            }
+                        }
+
+                    }
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+private fun getStartDestination(isLogged: Boolean) =
+    if (isLogged) Graph.HOME else Graph.AUTHENTICATION
+
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     GozemBusinessCaseTheme {
-        Greeting("Android")
+
     }
 }
