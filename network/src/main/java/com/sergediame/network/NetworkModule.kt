@@ -1,5 +1,6 @@
 package com.sergediame.network
 
+import com.sergediame.data.HomeScreenContentDataSource
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -14,6 +15,9 @@ import org.koin.dsl.module
 
 val networkModule = module {
     single { provideKtorClient() }
+    single { ApiService(get()) }
+    single { ApiMock() }
+    single<HomeScreenContentDataSource> { HomeScreenContentDataSourceImpl(get()) }
 }
 
 fun provideKtorClient(): HttpClient {
