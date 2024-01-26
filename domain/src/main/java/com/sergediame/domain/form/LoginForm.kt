@@ -2,31 +2,6 @@ package com.sergediame.domain.form
 
 
 private const val PASSWORD_MIN_LENGTH = 8
-private const val DEFAULT_PHONE_CODE = "+225"
-
-data class PhoneNumberField(
-    override val value: String,
-    val phoneCode: String = DEFAULT_PHONE_CODE,
-    override val isOptional: Boolean = false
-) : Field() {
-    companion object {
-        val EMPTY = PhoneNumberField(value = "", phoneCode = "")
-    }
-
-    override val error: FormError?
-        get() = if (validate()) null else FormError.InvalidPhoneNumber
-
-    override fun validate(): Boolean {
-
-        return value.isNotEmpty() && value.validatePhone()
-    }
-
-    fun getFullPhoneNumber(): String {
-        return phoneCode.plus(value)
-    }
-
-}
-
 
 data class PasswordField(
     override val value: String,
@@ -47,14 +22,14 @@ data class PasswordField(
 }
 
 data class LoginForm(
-    val phoneNumber: PhoneNumberField,
+    val email: EmailAddressField,
     val password: PasswordField
 ) : Form {
     companion object {
-        val INITIAL = LoginForm(PhoneNumberField.EMPTY, PasswordField.EMPTY)
+        val INITIAL = LoginForm(EmailAddressField.EMPTY, PasswordField.EMPTY)
     }
 
     override val isValid: Boolean
-        get() = phoneNumber.isValid && password.isValid
+        get() = email.isValid && password.isValid
 
 }

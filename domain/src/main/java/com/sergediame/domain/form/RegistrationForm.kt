@@ -22,18 +22,16 @@ data class EmailAddressField(
 
 data class RegistrationForm(
     val emailAddress: EmailAddressField,
-    val mobileNumber: PhoneNumberField,
     val password: PasswordField,
     val confirmPassword: PasswordField
 ) : Form {
 
     override val isValid: Boolean
-        get() = mobileNumber.isValid && password.isValid
+        get() = emailAddress.isValid && password.isValid
 
     companion object {
         val INITIAL = RegistrationForm(
             emailAddress = EmailAddressField.EMPTY,
-            mobileNumber = PhoneNumberField.EMPTY,
             password = PasswordField.EMPTY,
             confirmPassword = PasswordField.EMPTY
         )
