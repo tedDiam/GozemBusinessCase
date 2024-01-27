@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".GozemBusinessCaseApplication"
         android:allowBackup="true"
@@ -13,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GozemBusinessCase"
         tools:targetApi="31">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyADFOG8NWcB74OePvDvccTadbvq25Ho_b8"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -66,7 +66,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.koin.android)
     implementation(libs.coil.compose)
-    implementation ("io.insert-koin:koin-androidx-compose:3.5.3")
+    implementation (libs.koin.androidx.compose)
     // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
 
@@ -74,11 +74,17 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
 
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation(libs.androidx.lifecycle.runtime.compose)
 
-    implementation ("androidx.compose.material:material:1.5.4")
-    implementation("androidx.compose.material:material-icons-core:1.5.4")
-    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.material.icons.core)
+    implementation(libs.androidx.material.icons.extended)
+
+
+    //Google Services & Maps
+    //implementation ("com.google.android.gms:play-services-location:21.1.0")
+    implementation (libs.maps.compose)
+    implementation (libs.play.services.maps)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)

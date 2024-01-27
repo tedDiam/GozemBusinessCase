@@ -2,7 +2,6 @@ package com.sergediame.gozembusinesscase.navigation
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -10,15 +9,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.sergediame.domain.orZero
 import com.sergediame.gozembusinesscase.auth.authenticationGraph
 import com.sergediame.gozembusinesscase.home.DATA_SECTION
 import com.sergediame.gozembusinesscase.home.HomeRoute
 import com.sergediame.gozembusinesscase.home.MAP_SECTION
 import com.sergediame.gozembusinesscase.home.PROFILE_SECTION
+import com.sergediame.gozembusinesscase.map.MapRoute
+import com.sergediame.gozembusinesscase.map.UiMap
 import com.sergediame.gozembusinesscase.profile.ProfileRoute
 import com.sergediame.gozembusinesscase.profile.UiProfile
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -52,20 +52,22 @@ fun RootNavGraph(
                             val encodedImageLink = URLEncoder.encode(item.content.image, StandardCharsets.UTF_8.toString())
                             navController.navigate(route = item.content.route + "/$encodedImageLink/${item.content.name}/${item.content.email}")
                         }
-                        MAP_SECTION -> navController.navigate(route = item.content.route)
+                        MAP_SECTION -> {
+                            val encodedPinLink = URLEncoder.encode(item.content.pin, StandardCharsets.UTF_8.toString())
+                            navController.navigate(route = item.content.route + "/$encodedPinLink/${item.content.lat}/${item.content.lng}")
+                        }
                         DATA_SECTION -> navController.navigate(route = item.content.route)
                     }
                 })
         }
         composable(
-            route = Graph.Profile.route+"/{image}/{name}/{email}",
+            route = Graph.Profile.route + "/{image}/{name}/{email}",
             arguments = profileArgs
         ) {  backStackEntry ->
             val encodedImageLink = backStackEntry.arguments?.getString("image")
             val decodedImageLink = URLDecoder.decode(encodedImageLink, StandardCharsets.UTF_8.toString())
 
             ProfileRoute(
-
                 profile = UiProfile(
                     image = decodedImageLink,
                     name = backStackEntry.arguments?.getString("name")?: "",
@@ -73,8 +75,21 @@ fun RootNavGraph(
                 )
             )
         }
-        composable(route = Graph.Map.route) {
-            Text("Map Screen")
+        composable(
+            route = Graph.Map.route + "/{pin}/{lat}/{lng}",
+            arguments = mapArgs
+        ) { backStackEntry ->
+            val encodedPinLink = backStackEntry.arguments?.getString("pin")
+            val decodedPinLink =
+                URLDecoder.decode(encodedPinLink, StandardCharsets.UTF_8.toString())
+
+            MapRoute(
+                map = UiMap(
+                    pin = decodedPinLink,
+                    lat = backStackEntry.arguments?.getDouble("lat").orZero(),
+                    lng = backStackEntry.arguments?.getDouble("lng").orZero(),
+                )
+            )
         }
         composable(route = Graph.Data.route) {
             Text("Data Screen")
