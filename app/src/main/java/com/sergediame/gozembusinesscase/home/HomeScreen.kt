@@ -35,9 +35,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.sergediame.domain.User
 import com.sergediame.domain.entity.HomeScreenContentItem
-import com.sergediame.gozembusinesscase.components.CustomTopAppBar
 import com.sergediame.gozembusinesscase.common.UiState
 import com.sergediame.gozembusinesscase.common.UiStateWrapper
+import com.sergediame.gozembusinesscase.components.CustomTopAppBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -47,14 +47,13 @@ import org.koin.androidx.compose.koinViewModel
 fun HomeRoute(
     viewModel: HomeViewModel = koinViewModel(),
     navController: NavHostController = rememberNavController(),
-    onMenuItemClicked: (route: String) -> Unit,
+    onMenuItemClicked: (item: UiHomeScreenContentItem) -> Unit = {},
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     onNavigateToUnAuthenticated: () -> Unit,
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
 
     HomeScreen(
         uiState = uiState,
@@ -77,9 +76,10 @@ fun HomeScreen(
     navController: NavHostController,
     coroutineScope: CoroutineScope,
     drawerState: DrawerState,
-    onMenuItemClicked: (route: String) -> Unit,
+    onMenuItemClicked: (item: UiHomeScreenContentItem) -> Unit,
     onSignedOut: () -> Unit,
 ) {
+
     UiStateWrapper(uiState = uiState) { content ->
         HomeContent(
             content = content,
@@ -93,14 +93,13 @@ fun HomeScreen(
 
 }
 
-
 @Composable
 fun HomeContent(
     content: List<HomeScreenContentItem>,
     navController: NavHostController,
     coroutineScope: CoroutineScope,
     drawerState: DrawerState,
-    onMenuItemClicked: (route: String) -> Unit,
+    onMenuItemClicked: (item: UiHomeScreenContentItem) -> Unit,
     onSignedOut: () -> Unit,
 ) {
 
@@ -110,11 +109,12 @@ fun HomeContent(
     val drawerWidth = screenWidth * 80 / 100
 
     ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
+        val user = content.first().content.name
         ModalDrawerSheet(
             modifier = Modifier.width(drawerWidth)
         ) {
             HomeDrawerContent(
-                user = User("rere", "dsds"),
+                user = user,
                 onSignedOut = onSignedOut
             ) { route ->
                 coroutineScope.launch {
@@ -134,15 +134,13 @@ fun HomeContent(
 
     }
 
-
 }
-
 
 @Composable
 fun RenderHome(
     drawerState: DrawerState,
     items: List<HomeScreenContentItem>,
-    onMenuItemClicked: (route: String) -> Unit
+    onMenuItemClicked: (item: UiHomeScreenContentItem) -> Unit
 ) {
     Column {
         CustomTopAppBar(drawerState)
@@ -156,17 +154,15 @@ fun RenderHome(
                     )
                 }
             }
-
         }
     }
-
 }
 
 
 @Composable
 fun HorizontalPanel(
     item: UiHomeScreenContentItem, modifier: Modifier,
-    onMenuItemClicked: (route: String) -> Unit
+    onMenuItemClicked: (content: UiHomeScreenContentItem) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -178,7 +174,7 @@ fun HorizontalPanel(
 
     ) {
         Row(Modifier.clickable {
-            onMenuItemClicked(item.content.route)
+            onMenuItemClicked(item)
         }) {
             Column(
                 modifier = Modifier

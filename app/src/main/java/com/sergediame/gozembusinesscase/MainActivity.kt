@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 }
 
 private fun getStartDestination(isLogged: Boolean) =
-    if (isLogged) Graph.HOME else Graph.AUTHENTICATION
+    if (isLogged) Graph.Home.route else Graph.Auth.route
 
 
 

@@ -10,11 +10,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.sergediame.domain.entity.Content
 import com.sergediame.domain.entity.HomeScreenContentItem
 import com.sergediame.gozembusinesscase.navigation.Graph
+import com.sergediame.gozembusinesscase.ui.theme.CornHarvest
+import com.sergediame.gozembusinesscase.ui.theme.DarkPurple
+import com.sergediame.gozembusinesscase.ui.theme.Endeavour
 
 
-private const val PROFILE_SECTION = "profile"
-private const val MAP_SECTION = "map"
-private const val DATA_SECTION = "data"
+const val PROFILE_SECTION = "profile"
+const val MAP_SECTION = "map"
+const val DATA_SECTION = "data"
 
 
 data class UiHomeScreenContentItem(
@@ -93,18 +96,18 @@ private fun attachIcon(type: String):ImageVector{
 
 private fun attachColor(type: String):Color{
     return when(type){
-        PROFILE_SECTION -> Color(0xFF264a91)
-        MAP_SECTION -> Color(0xFF912680)
-        DATA_SECTION -> Color(0xFF916c26)
-        else -> Color(0xFF264a91)
+        PROFILE_SECTION -> Endeavour
+        MAP_SECTION -> DarkPurple
+        DATA_SECTION -> CornHarvest
+        else -> Endeavour
     }
 }
 
 private fun attachRoute(type: String):String{
     return when(type){
-        PROFILE_SECTION -> Graph.PROFILE
-        MAP_SECTION -> Graph.MAP
-        DATA_SECTION -> Graph.DATA
-        else -> Graph.PROFILE
+        PROFILE_SECTION -> Graph.Profile.route
+        MAP_SECTION -> Graph.Map.route
+        DATA_SECTION -> Graph.Data.route
+        else -> Graph.Profile.route
     }
 }

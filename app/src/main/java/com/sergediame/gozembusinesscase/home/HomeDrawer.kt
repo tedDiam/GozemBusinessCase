@@ -28,7 +28,7 @@ import com.sergediame.gozembusinesscase.R
 
 @Composable
 fun HomeDrawerContent(
-    user: User,
+    user: String,
     onSignedOut: () -> Unit,
     onMenuClick: (String) -> Unit,
 ) {
@@ -43,7 +43,7 @@ fun HomeDrawerContent(
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
-            Text(text = "Hello User name !", fontSize = 16.sp)
+            Text(text = "Hello ! $user", fontSize = 16.sp)
         }
         Spacer(modifier = Modifier.height(8.dp))
 

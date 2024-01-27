@@ -16,7 +16,7 @@ fun NavGraphBuilder.authenticationGraph(
 ) {
 
     navigation(
-            route = Graph.AUTHENTICATION,
+            route = Graph.Auth.route,
             startDestination = AuthDestination.Login.route
     ) {
         composable(route = AuthDestination.Login.route) {

@@ -12,6 +12,10 @@ val Green40 = Color(0xFF7dbd87)
 val JellyBean40 = Color(0xFF7da6bd)
 val BurntUmber40 = Color(0xFFbd7d8c)
 
+val Endeavour = Color(0xFF264a91)
+val DarkPurple = Color(0xFF912680)
+val CornHarvest = Color(0xFF916c26)
+
 
 
 
