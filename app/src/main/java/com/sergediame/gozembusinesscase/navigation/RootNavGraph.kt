@@ -11,6 +11,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.sergediame.domain.orZero
 import com.sergediame.gozembusinesscase.auth.authenticationGraph
+import com.sergediame.gozembusinesscase.data.DataRoute
+import com.sergediame.gozembusinesscase.data.UiData
 import com.sergediame.gozembusinesscase.home.DATA_SECTION
 import com.sergediame.gozembusinesscase.home.HomeRoute
 import com.sergediame.gozembusinesscase.home.MAP_SECTION
@@ -49,29 +51,44 @@ fun RootNavGraph(
                 onMenuItemClicked = { item ->
                     when (item.type) {
                         PROFILE_SECTION -> {
-                            val encodedImageLink = URLEncoder.encode(item.content.image, StandardCharsets.UTF_8.toString())
+                            val encodedImageLink = URLEncoder.encode(
+                                item.content.image,
+                                StandardCharsets.UTF_8.toString()
+                            )
                             navController.navigate(route = item.content.route + "/$encodedImageLink/${item.content.name}/${item.content.email}")
                         }
+
                         MAP_SECTION -> {
-                            val encodedPinLink = URLEncoder.encode(item.content.pin, StandardCharsets.UTF_8.toString())
+                            val encodedPinLink = URLEncoder.encode(
+                                item.content.pin,
+                                StandardCharsets.UTF_8.toString()
+                            )
                             navController.navigate(route = item.content.route + "/$encodedPinLink/${item.content.lat}/${item.content.lng}")
                         }
-                        DATA_SECTION -> navController.navigate(route = item.content.route)
+
+                        DATA_SECTION -> {
+                            val encodedWsUrl = URLEncoder.encode(
+                                item.content.source,
+                                StandardCharsets.UTF_8.toString()
+                            )
+                            navController.navigate(route = item.content.route + "/${encodedWsUrl}/${item.content.value}")
+                        }
                     }
                 })
         }
         composable(
             route = Graph.Profile.route + "/{image}/{name}/{email}",
             arguments = profileArgs
-        ) {  backStackEntry ->
+        ) { backStackEntry ->
             val encodedImageLink = backStackEntry.arguments?.getString("image")
-            val decodedImageLink = URLDecoder.decode(encodedImageLink, StandardCharsets.UTF_8.toString())
+            val decodedImageLink =
+                URLDecoder.decode(encodedImageLink, StandardCharsets.UTF_8.toString())
 
             ProfileRoute(
                 profile = UiProfile(
                     image = decodedImageLink,
-                    name = backStackEntry.arguments?.getString("name")?: "",
-                    email = backStackEntry.arguments?.getString("email")?: ""
+                    name = backStackEntry.arguments?.getString("name") ?: "",
+                    email = backStackEntry.arguments?.getString("email") ?: ""
                 )
             )
         }
@@ -91,21 +108,32 @@ fun RootNavGraph(
                 )
             )
         }
-        composable(route = Graph.Data.route) {
-            Text("Data Screen")
-        }
 
+        composable(
+            route = Graph.Data.route + "/{source}/{value}",
+            arguments = dataArgs
+        ) { backStackEntry ->
+            val encodedWsUrl = backStackEntry.arguments?.getString("source")
+            val decodedWsUrl =
+                URLDecoder.decode(encodedWsUrl, StandardCharsets.UTF_8.toString())
+            DataRoute(
+                data = UiData(
+                    decodedWsUrl,
+                    backStackEntry.arguments?.getString("value") ?: ""
+                )
+            )
+        }
     }
 }
 
 val profileArgs = listOf(
     navArgument("image") {
-    type = NavType.StringType
-}, navArgument("name") {
-    type = NavType.StringType
-}, navArgument("email") {
-    type = NavType.StringType
-})
+        type = NavType.StringType
+    }, navArgument("name") {
+        type = NavType.StringType
+    }, navArgument("email") {
+        type = NavType.StringType
+    })
 
 val dataArgs = listOf(
     navArgument("source") {
@@ -123,12 +151,15 @@ val mapArgs = listOf(
         type = NavType.StringType
     })
 
-sealed class Graph(override val route: String, override val arguments: List<NamedNavArgument> ) : Destination {
-    data object Root: Graph( route ="root", emptyList())
-    data object Map: Graph( route ="map", mapArgs)
-    data object Data: Graph( route ="data", dataArgs)
-    data object Profile: Graph( route ="profile", arguments = profileArgs)
-    data object Home: Graph( route ="home", emptyList())
-    data object Auth: Graph( route ="auth", emptyList())
+sealed class Graph(
+    override val route: String,
+    override val arguments: List<NamedNavArgument>
+) : Destination {
+    data object Root : Graph(route = "root", emptyList())
+    data object Map : Graph(route = "map", mapArgs)
+    data object Data : Graph(route = "data", dataArgs)
+    data object Profile : Graph(route = "profile", arguments = profileArgs)
+    data object Home : Graph(route = "home", emptyList())
+    data object Auth : Graph(route = "auth", emptyList())
 
 }

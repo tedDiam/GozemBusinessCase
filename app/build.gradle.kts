@@ -74,11 +74,11 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
 
-    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
-    implementation(libs.androidx.material)
-    implementation(libs.androidx.material.icons.core)
-    implementation(libs.androidx.material.icons.extended)
+    implementation ("androidx.compose.material:material:1.5.4")
+    implementation("androidx.compose.material:material-icons-core:1.5.4")
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
 
 
     //Google Services & Maps
