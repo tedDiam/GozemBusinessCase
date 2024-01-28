@@ -80,6 +80,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core:1.5.4")
     implementation("androidx.compose.material:material-icons-extended:1.5.4")
 
+    implementation ("com.google.android.gms:play-services-location:21.1.0")
+
 
     //Google Services & Maps
     //implementation ("com.google.android.gms:play-services-location:21.1.0")
@@ -88,6 +90,7 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

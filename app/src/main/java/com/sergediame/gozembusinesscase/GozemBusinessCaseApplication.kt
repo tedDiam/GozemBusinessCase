@@ -4,6 +4,7 @@ import android.app.Application
 import com.sergediame.auth.authModule
 
 import com.sergediame.data.dataModule
+
 import com.sergediame.network.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
