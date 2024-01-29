@@ -1,6 +1,6 @@
-package com.sergediame.data
+package com.sergediame.data.auth
 
-import com.sergediame.domain.AuthRepository
+import com.sergediame.domain.auth.AuthRepository
 import com.sergediame.domain.User
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

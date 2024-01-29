@@ -1,5 +1,6 @@
-package com.sergediame.domain
+package com.sergediame.domain.auth
 
+import com.sergediame.domain.User
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {

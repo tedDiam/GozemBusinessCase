@@ -1,6 +1,6 @@
-package com.sergediame.data
+package com.sergediame.data.home
 
-import com.sergediame.domain.HomeScreenContentRepository
+import com.sergediame.domain.home.HomeScreenContentRepository
 import com.sergediame.domain.entity.HomeScreenContentItem
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

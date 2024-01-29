@@ -2,7 +2,7 @@ package com.sergediame.auth
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.sergediame.data.AuthenticationService
+import com.sergediame.data.auth.AuthenticationService
 import com.sergediame.domain.User
 import kotlinx.coroutines.tasks.await
 

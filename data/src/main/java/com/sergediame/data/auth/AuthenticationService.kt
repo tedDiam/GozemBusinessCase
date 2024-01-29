@@ -1,7 +1,6 @@
-package com.sergediame.data
+package com.sergediame.data.auth
 
 
-import com.sergediame.domain.Response
 import com.sergediame.domain.User
 
 interface AuthenticationService {
