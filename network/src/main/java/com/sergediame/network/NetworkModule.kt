@@ -5,6 +5,7 @@ import com.sergediame.data.home.HomeScreenContentDataSource
 import com.sergediame.network.home.HomeScreenContentDataSourceImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
+import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.ANDROID
 import io.ktor.client.plugins.logging.LogLevel
@@ -25,7 +26,7 @@ val networkModule = module {
 }
 
 fun provideKtorClient(): HttpClient {
-    return HttpClient(Android) {
+    return HttpClient(OkHttp) {
 
         install(ContentNegotiation) {
             json(Json {
