@@ -4,7 +4,7 @@ package com.sergediame.gozembusinesscase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
-import com.sergediame.domain.AuthRepository
+import com.sergediame.domain.auth.AuthRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

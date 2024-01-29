@@ -2,8 +2,8 @@ package com.sergediame.gozembusinesscase.home
 
 
 import androidx.lifecycle.viewModelScope
-import com.sergediame.domain.AuthRepository
-import com.sergediame.domain.HomeScreenContentRepository
+import com.sergediame.domain.auth.AuthRepository
+import com.sergediame.domain.home.HomeScreenContentRepository
 import com.sergediame.domain.asResult
 import com.sergediame.domain.entity.HomeScreenContentItem
 import com.sergediame.gozembusinesscase.common.DataViewModel

@@ -3,7 +3,7 @@ package com.sergediame.gozembusinesscase.auth.login
 import com.sergediame.gozembusinesscase.common.FormViewModel
 import com.sergediame.gozembusinesscase.common.UiState
 import com.sergediame.gozembusinesscase.common.asUiState
-import com.sergediame.domain.AuthRepository
+import com.sergediame.domain.auth.AuthRepository
 import com.sergediame.domain.form.LoginForm
 import com.sergediame.domain.resultOf
 

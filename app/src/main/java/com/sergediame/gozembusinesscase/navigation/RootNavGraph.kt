@@ -117,7 +117,7 @@ fun RootNavGraph(
             val decodedWsUrl =
                 URLDecoder.decode(encodedWsUrl, StandardCharsets.UTF_8.toString())
             DataRoute(
-                data = UiData(
+                uiData = UiData(
                     decodedWsUrl,
                     backStackEntry.arguments?.getString("value") ?: ""
                 )

@@ -1,4 +1,4 @@
-package com.sergediame.data
+package com.sergediame.data.home
 
 import com.sergediame.domain.entity.HomeScreenContentItem
 
